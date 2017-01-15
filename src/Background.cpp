@@ -1,4 +1,5 @@
 #include "Background.h"
+#include <time.h>
 
 int backgroundsCount = 10;
 sf::String backgrounds[10] = {
@@ -16,6 +17,8 @@ sf::String backgrounds[10] = {
 
 sf::String bgFile()
 {
+    srand(time(0));
+
     int backgroundId = rand() % backgroundsCount;
 
     return backgrounds[backgroundId];

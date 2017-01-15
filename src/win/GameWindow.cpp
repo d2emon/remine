@@ -70,7 +70,6 @@ int GameWindow::run()
                 int x = pos.x / spriteWidth;
                 int y = pos.y / spriteWidth;
 
-                printf("%d, %d :: %d, %d\n", pos.x, pos.y, x, y);
                 if (event.key.code == sf::Mouse::Left)
                 {
                     sgrid[x][y] = grid[x][y];

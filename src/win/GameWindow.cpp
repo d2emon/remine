@@ -63,6 +63,23 @@ int GameWindow::run()
             if (event.type == sf::Event::Closed ||
                 (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape))
                 window.close();
+
+            if (event.type == sf::Event::MouseButtonPressed)
+            {
+                sf::Vector2i pos = sf::Mouse::getPosition(window);
+                int x = pos.x / spriteWidth;
+                int y = pos.y / spriteWidth;
+
+                printf("%d, %d :: %d, %d\n", pos.x, pos.y, x, y);
+                if (event.key.code == sf::Mouse::Left)
+                {
+                    sgrid[x][y] = grid[x][y];
+                }
+                else if (event.key.code == sf::Mouse::Right)
+                {
+                    sgrid[x][y] = 11;
+                }
+            }
         }
         show();
     }
@@ -79,7 +96,8 @@ void GameWindow::show()
     for(int i=1; i <= 10; i++)
         for(int j=1; j <= 10; j++)
         {
-            sgrid[i][j] = grid[i][j];
+            if(sgrid[i][j] == 9)
+                sgrid[i][j] = grid[i][j];
             sprite.setTextureRect(sf::IntRect(sgrid[i][j]*spriteWidth, 0, spriteWidth, spriteWidth));
             sprite.setPosition(i*spriteWidth, j*spriteWidth);
             window.draw(sprite);

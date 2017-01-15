@@ -6,5 +6,7 @@
 extern sf::String gameTitle;
 extern int winSize[2];
 
+extern int spriteWidth;
+
 
 #endif // SETTINGS_H_INCLUDED

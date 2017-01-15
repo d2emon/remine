@@ -1,5 +1,6 @@
 #include "GameWindow.h"
 #include <time.h>
+#include "settings.h"
 
 GameWindow::GameWindow(sf::RenderWindow &window): D2Window(window)
 {
@@ -51,21 +52,19 @@ int GameWindow::run()
 
 void GameWindow::show()
 {
-    int w = 32;
-
     // Clear screen
-    window.clear(sf::Color::White);
+    window.clear();
+    window.draw(bg);
 
     for(int i=1; i <= 10; i++)
         for(int j=1; j <= 10; j++)
         {
-            sprite.setTextureRect(sf::IntRect(sgrid[i][j] * w, 0, w, w));
-            sprite.setPosition(i*w, j*w);
+            sprite.setTextureRect(sf::IntRect(sgrid[i][j]*spriteWidth, 0, spriteWidth, spriteWidth));
+            sprite.setPosition(i*spriteWidth, j*spriteWidth);
             window.draw(sprite);
         }
 
     // Draw the sprite
-    // window.draw(bg);
     // window.draw(sprite);
 
     // Update the window

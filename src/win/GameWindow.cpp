@@ -14,8 +14,6 @@ GameWindow::~GameWindow()
 
 int GameWindow::load()
 {
-    int grid[12][12];
-
     if (!texture.loadFromFile("res/tiles.jpg"))
         return EXIT_FAILURE;
     sprite.setTexture(texture);
@@ -24,7 +22,29 @@ int GameWindow::load()
         for(int j=1; j <= 10; j++)
         {
             sgrid[i][j] = 10;
+            if (rand() % 5 == 0)
+                grid[i][j] = 9;
+            else
+                grid[i][j] = 0;
         }
+
+    for(int i=1; i <= 10; i++)
+        for(int j=1; j <= 10; j++)
+        {
+            int n=0;
+            if (grid[i  ][j  ] == 9) continue;
+            if (grid[i+1][j  ] == 9) n++;
+            if (grid[i  ][j+1] == 9) n++;
+            if (grid[i-1][j  ] == 9) n++;
+            if (grid[i  ][j-1] == 9) n++;
+            if (grid[i+1][j+1] == 9) n++;
+            if (grid[i-1][j-1] == 9) n++;
+            if (grid[i-1][j+1] == 9) n++;
+            if (grid[i+1][j-1] == 9) n++;
+
+            grid[i][j] = n;
+        }
+
     return 1;
 }
 
@@ -59,6 +79,7 @@ void GameWindow::show()
     for(int i=1; i <= 10; i++)
         for(int j=1; j <= 10; j++)
         {
+            sgrid[i][j] = grid[i][j];
             sprite.setTextureRect(sf::IntRect(sgrid[i][j]*spriteWidth, 0, spriteWidth, spriteWidth));
             sprite.setPosition(i*spriteWidth, j*spriteWidth);
             window.draw(sprite);

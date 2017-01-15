@@ -16,6 +16,7 @@ class GameWindow : public D2Window
         sf::Sprite sprite;
 
         int sgrid[12][12];
+        int grid[12][12];
 
         int load();
         int run();
